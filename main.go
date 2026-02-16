@@ -2,39 +2,56 @@ package main
 
 import (
 	"fmt"
+	data_structure "go-fiber/data-structure"
 	"sync"
 	"time"
 )
 
 func main() {
-	fmt.Println("Gello")
-	myChannel := make(chan int, 3)
-	wg := &sync.WaitGroup{}
 
-	wg.Add(2)
-	defer wg.Wait()
+	var stack = data_structure.Stack{}
+	fmt.Println(stack.IsEmpty())
+	stack.Push(10)
+	fmt.Println(stack.Front())
+	fmt.Println(stack.Length())
+	stack.Push(20)
+	fmt.Println(stack.Length())
+	stack.Pop()
+	fmt.Println(stack.Front())
+	stack.Pop()
+	fmt.Println(stack.Front())
 
-	go func(ch chan int, wg *sync.WaitGroup) {
-		fmt.Println(<-myChannel)
-		fmt.Println(<-myChannel)
-		fmt.Println(<-myChannel)
-		wg.Done()
-	}(myChannel, wg)
+	/*
+		fmt.Println("Gello")
+		myChannel := make(chan int, 3)
+		wg := &sync.WaitGroup{}
 
-	go func(ch chan int, wg *sync.WaitGroup) {
+		wg.Add(2)
+		defer wg.Wait()
 
-		myChannel <- 5
-		myChannel <- 2
-		myChannel <- 3
-		wg.Done()
-	}(myChannel, wg)
+		go func(ch chan int, wg *sync.WaitGroup) {
+			fmt.Println(<-myChannel)
+			fmt.Println(<-myChannel)
+			fmt.Println(<-myChannel)
+			wg.Done()
+		}(myChannel, wg)
 
-	//myChannel <- 5
-	//myChannel <- 3
-	//myChannel <- 1
-	//fmt.Println(<-myChannel)
-	wg.Wait()
-	close(myChannel)
+		go func(ch chan int, wg *sync.WaitGroup) {
+
+			myChannel <- 5
+			myChannel <- 2
+			myChannel <- 3
+			wg.Done()
+		}(myChannel, wg)
+
+		//myChannel <- 5
+		//myChannel <- 3
+		//myChannel <- 1
+		//fmt.Println(<-myChannel)
+		wg.Wait()
+		close(myChannel)
+
+	*/
 }
 
 var lock sync.Mutex
