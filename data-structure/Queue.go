@@ -1,40 +1,40 @@
 package data_structure
 
-type Queue struct {
-	items []int
+type Queue[T any] struct {
+	items []T
 }
 
-// Q
+// Front Q
 // front pop, access
-func (q *Queue) Front() int {
+func (q *Queue[T]) Front() T {
 	if len(q.items) == 0 {
 		panic("Q underflow")
 	}
 	return q.items[0]
 }
 
-// back push
-func (q *Queue) Push(value int) {
+// Push back push
+func (q *Queue[T]) Push(value T) {
 	q.items = append(q.items, value)
 }
 
-// size()
-func (q *Queue) Size() int {
+// Size size()
+func (q *Queue[T]) Size() int {
 	return len(q.items)
 }
 
-// isEmpty()
-func (q *Queue) IsEmpty() bool {
+// IsEmpty isEmpty()
+func (q *Queue[T]) IsEmpty() bool {
 	return len(q.items) == 0
 }
 
-// pop()
-func (q *Queue) Pop() int {
+// Pop pop()
+func (q *Queue[T]) Pop() T {
 
 	if len(q.items) == 0 {
 		panic("Q Underflow")
 	}
 	first := q.items[0]
-	q.items = append([]int{}, q.items[1:]...)
+	q.items = append([]T{}, q.items[1:]...)
 	return first
 }
